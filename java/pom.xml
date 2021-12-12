@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>dev.avelier</groupId>
+  <artifactId>java-go-interop</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>java-go-interop</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>7</maven.compiler.source>
+    <maven.compiler.target>7</maven.compiler.target>
+    <graalvm.version>21.0.0.2</graalvm.version>
+    <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+    <project.root></project.root>
+  </properties>
+
+  <dependencies>
+    <dependency>
+        <groupId>org.graalvm.nativeimage</groupId>
+        <artifactId>native-image-maven-plugin</artifactId>
+        <version>${graalvm.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.graalvm.buildtools</groupId>
+      <artifactId>junit-platform-native</artifactId>
+      <version>0.9.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>native</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
+            <version>0.9.0</version>
+            <executions>
+              <execution>
+                <id>test-native</id>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <phase>test</phase>
+              </execution>
+              <execution>
+                <id>build-native</id>
+                <goals>
+                  <goal>build</goal>
+                </goals>
+                <phase>package</phase>
+              </execution>
+            </executions>
+            <configuration>
+              <imageName>libmyapp</imageName>
+              <mainClass>dev.avelier.App</mainClass>
+              <buildArgs>
+              --verbose
+              --shared
+              </buildArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
