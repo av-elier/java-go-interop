@@ -39,8 +39,6 @@ go run main.go
 
 # TODO
 
-* create stateful java class instance from go
-* call methods
-* convert call result to go types
 * profile to see how slow it is and how much memory consumed
 * use make tool (Makefile?)
+* read https://github.com/rinx/graalvm-java-cgo-test and https://github.com/oracle/graal/issues/2711
