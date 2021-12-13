@@ -16,6 +16,14 @@ public class Summator {
         return s.calc(x);
     }
 
+    @CEntryPoint(name = "Java_dev_avelier_callCalcN")
+    public static double callCalcN(@CEntryPoint.IsolateThreadContext long isolateId, Summator s, double x, long n) {
+        for (int i = 0; i < n-1; i++) {
+            s.calc(x);
+        }
+        return s.calc(x);
+    }
+
     @CEntryPoint(name = "Java_dev_avelier_createSummator")
     public static Summator createSummator(@CEntryPoint.IsolateThreadContext long isolateId) {
         return new Summator();
