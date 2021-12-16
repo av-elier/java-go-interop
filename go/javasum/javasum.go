@@ -4,6 +4,7 @@ package javasum
 // #cgo LDFLAGS: -L${SRCDIR}/../../java/target
 // #cgo LDFLAGS: -lmyapp
 // #include <libmyapp.h>
+// #include <stdlib.h>
 import "C"
 
 import (
@@ -11,12 +12,12 @@ import (
 )
 
 type JavaSum struct {
-	isolate  C.longlong
+	isolate  *C.graal_isolatethread_t
 	summator unsafe.Pointer
 }
 
 func CreateJavaSum() JavaSum {
-	isolate := C.Java_dev_avelier_createIsolate()
+	var isolate *C.graal_isolatethread_t = C.Java_dev_avelier_createIsolate()
 	summator := C.Java_dev_avelier_createSummator(isolate)
 	return JavaSum{
 		isolate:  isolate,

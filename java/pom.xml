@@ -85,8 +85,8 @@
               <imageName>libmyapp</imageName>
               <mainClass>dev.avelier.App</mainClass>
               <buildArgs>
-              --verbose
-              --shared
+                --verbose
+                --shared
               </buildArgs>
             </configuration>
           </plugin>

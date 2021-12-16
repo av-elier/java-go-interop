@@ -9,29 +9,47 @@ import (
 
 func BenchmarkSum(b *testing.B) {
 	s := gosum.CreateGoSum()
+	b.ResetTimer()
 	runSum(s, b)
 }
 
 func BenchmarkGraalSum(b *testing.B) {
 	s := javasum.CreateJavaSum()
+	b.ResetTimer()
 	runSum(s, b)
 }
 func BenchmarkSum10(b *testing.B) {
 	s := gosum.CreateGoSum()
+	b.ResetTimer()
 	runSumN(s, b, 10)
 }
 func BenchmarkGraalSum10(b *testing.B) {
 	s := javasum.CreateJavaSum()
+	b.ResetTimer()
 	runSumN(s, b, 10)
+}
+
+func BenchmarkSum100(b *testing.B) {
+	s := gosum.CreateGoSum()
+	b.ResetTimer()
+	runSumN(s, b, 100)
+}
+
+func BenchmarkGraalSum100(b *testing.B) {
+	s := javasum.CreateJavaSum()
+	b.ResetTimer()
+	runSumN(s, b, 100)
 }
 
 func BenchmarkSum1000(b *testing.B) {
 	s := gosum.CreateGoSum()
+	b.ResetTimer()
 	runSumN(s, b, 1000)
 }
 
 func BenchmarkGraalSum1000(b *testing.B) {
 	s := javasum.CreateJavaSum()
+	b.ResetTimer()
 	runSumN(s, b, 1000)
 }
 
